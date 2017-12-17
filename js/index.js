@@ -20,6 +20,11 @@
     archive = new DatArchive(window.location)
     archiveInfo = await archive.getInfo()
     setTitle(archiveInfo.title)
+
+    if (archiveInfo.isOwner) {
+      $('.owner-only').show();
+    }
+
   } catch (err) {
     updatePrompt('<p>Something went wrong.</p><a href="https://github.com/beakerbrowser/dat-photos-app">Report an issue</a>')
   }
@@ -55,6 +60,32 @@
 
     // go to the new archive
     window.location = album.url
+  }
+
+  aysnc function onCreatePublicAlbum(e){
+    // create the album, just like normal
+    // create a new Dat archive
+    const album = await DatArchive.create()
+
+    // create the /images directory
+    await album.mkdir('/images')
+
+    // write the album's URL to localStorage
+    albums.push(album.url)
+    window.localStorage.setItem('albums', JSON.stringify(albums))
+
+    // write the album's assets
+    const html = await archive.readFile('album.html')
+    html2 = html.replace(/{{DAT_ARCHIVE_URL}}/g, archive.url)
+    await album.writeFile('index.html', html2)
+    await album.commit()
+
+    //but before we go
+
+    
+
+    //to the new archive
+    //window.location = album.url
   }
 
   async function onDeleteAlbum (e) {
