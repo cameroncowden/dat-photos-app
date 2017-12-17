@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Photo gallery</title>
+    <title>Photo Sharing - Album Generator</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/base.css"/>
@@ -20,11 +20,27 @@
       <button class="create-album btn primary">Create album +</button>
     </header>
 
-    <div class="albums-container">
+    <section>
+      <h1>Photo Sharing - Album Generator</h1>
+      <p>This peer to peer website can be used in 3 three ways.</p>
+      <ol>
+        <li>You can fork this site, to create your own album generator and photo sharing page.</li>
+        <li>You can use this site to create a private photo album, which will be a new Dat site hosted on your local machine.</li>
+        <li>You can view the public photo albums on this site.</li>
+      </ol>
+    </section>
+    <h2>Your Private Albums:</h2>
+    <div class="albums-container"> 
       <div class="create-album album" title="Create new album">
         <div class="placeholder">+</div>
         <div class="title">Create album</div>
       </div>
+    </div>
+    <h2>This site's Public Albums:</h2>
+    <div class="public-albums">
+      <ul>
+        <!-- <li><a href="dat://7392ce72a9e04e8803e5fb046c27d412c56869ee77f7eac9725a8a368f85f2cd/">Misc</a></li> -->
+      </ul>
     </div>
     <script src="js/index.js"></script>
   </body>
