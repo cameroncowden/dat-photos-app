@@ -142,6 +142,6 @@ header {
 #prompt:empty {
   display: none;
 }
-.owner-only {
+.owner-only, .owner-only.btn {
   display: none;
 }

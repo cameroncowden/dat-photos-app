@@ -22,7 +22,7 @@
     setTitle(archiveInfo.title)
 
     if (archiveInfo.isOwner) {
-      $('.owner-only').show();
+      document.getElementById('create_album_public').style.display = 'block';
     }
 
   } catch (err) {
@@ -62,7 +62,7 @@
     window.location = album.url
   }
 
-  aysnc function onCreatePublicAlbum(e){
+  async function onCreatePublicAlbum(e){
     // create the album, just like normal
     // create a new Dat archive
     const album = await DatArchive.create()
@@ -82,10 +82,43 @@
 
     //but before we go
 
+    var found_public_albums = false;
+    try {
+      var public_albums = await archive.stat('/public_albums.json');
+      console.log(public_albums);
+      //file exists, should append new album
+      found_public_albums = true;
+    } catch(e) {
+      //file doesn't exist (no public albums), should create !
+      console.log(e)
+    }
+    if (found_public_albums) {
+      //console.log('found public albums, appending new dat url')
+      var public_albums = await archive.readFile('/public_albums.json');
+      public_albums += ',';
+      public_albums += album.url;
+      await archive.writeFile('/public_albums.json', public_albums);
+      await archive.commit();
+      
+    } else {
+      //console.log('creating public_albums.json and seeding with new dat url')
+      var public_albums = album.url;
+      await archive.writeFile('/public_albums.json', public_albums);
+      await archive.commit();
+    }
     
 
-    //to the new archive
-    //window.location = album.url
+    //add the new album url to this dat's public_albums.json
+
+    //ask if they want to go to the new archive
+    if (confirm('Go to your new album?')) {
+        //go
+        window.location = album.url
+    } else {
+        // stay, but re-render to list the public album
+        window.location.reload()
+    }
+    
   }
 
   async function onDeleteAlbum (e) {
@@ -114,16 +147,35 @@
 
     document.querySelectorAll('.create-album').forEach(el => el.addEventListener('click', onCreateAlbum))
 
+    document.getElementById('create_album_public').addEventListener('click', onCreatePublicAlbum)
+
     renderAlbums()
   }
 
-  function renderAlbums () {
+  async function renderAlbums () {
+    //render private albums from window.localstorage
     for (let i = 0; i < albums.length; i++) {
-      appendAlbum(new DatArchive(albums[i]))
+      appendAlbum(new DatArchive(albums[i]), 'private')
+      console.log(albums[i]);
+    }
+
+    //render public albums from public_albums.json
+    try {
+      var public_albums = await archive.readFile('/public_albums.json');
+      //found public albums, let's parse and render them
+      console.log(public_albums);
+      var public_album_urls = public_albums.split(',');
+      for (let i = 0; i < public_album_urls.length; i++) {
+        console.log('found public album:' + public_album_urls[i]);
+        appendAlbum(new DatArchive(public_album_urls[i]), 'public')
+      }
+    } catch(e) {
+      //no public albums, don't worry
+      console.log(e)
     }
   }
 
-  async function appendAlbum (album) {
+  async function appendAlbum (album, container) {
     const info = await album.getInfo()
     let albumHTML = ''
 
@@ -186,11 +238,19 @@
     dropdownBtn.addEventListener('click', toggleAlbumDropdown)
     el.appendChild(dropdownBtn)
 
-    document.querySelector('.albums-container').appendChild(el)
+    if (container == 'private') {
+      document.getElementById('private_albums').appendChild(el)
+    } else if (container == 'public') {
+      document.getElementById('public_albums').appendChild(el)
+    } else {
+      document.querySelector('.albums-container').appendChild(el)
+    }
+    
 
     document.querySelectorAll('.delete-album-btn').forEach(function (el) {
       el.addEventListener('click', onDeleteAlbum)
     })
+
   }
 
   function renderUAPrompt () {

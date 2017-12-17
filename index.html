@@ -18,7 +18,7 @@
 
     <header>
       <button class="create-album btn primary">Create Private album +</button>
-      <button class="create-album_public btn primary owner-only">Create Public album +</button>
+      <button id="create_album_public" class="create-album_public btn primary owner-only">Create Public album +</button>
     </header>
 
     <section>
@@ -31,14 +31,14 @@
       </ol>
     </section>
     <h2>Your Private Albums:</h2>
-    <div class="albums-container"> 
+    <div id="private_albums" class="albums-container"> 
       <div class="create-album album" title="Create new album">
         <div class="placeholder">+</div>
         <div class="title">Create album</div>
       </div>
     </div>
     <h2>This site's Public Albums:</h2>
-    <div class="public-albums">
+    <div id="public_albums" class="public-albums albums-container">
       <ul>
         <!-- <li><a href="dat://7392ce72a9e04e8803e5fb046c27d412c56869ee77f7eac9725a8a368f85f2cd/">Misc</a></li> -->
       </ul>
