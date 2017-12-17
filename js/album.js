@@ -69,6 +69,8 @@
     // either add or remove the path to selectedImages
     if (idx === -1) selectedImages.push(path)
     else selectedImages.splice(idx, 1)
+
+    showSelectionOptions(selectedImages)
   }
 
   async function onDeleteSelected () {
@@ -84,6 +86,17 @@
     await archive.commit()
     // clear selectedImages array
     selectedImages.length = 0
+  }
+
+  function showSelectionOptions() {
+    console.log(selectedImages);
+    if (selectedImages.length > 0 ) {
+      $("#zoom_selection").show(); 
+      console.log(selectedImages.length + ' images selected.');
+    } else {
+      console.log('no selection');
+      $("#zoom_selection").hide();
+    }
   }
 
   function onEditInfo () {
@@ -104,6 +117,11 @@
 
     document.getElementById('more-btn').addEventListener('click', function (e) {
       document.querySelector('.more-dropdown').classList.toggle('visible')
+    })
+
+    document.getElementById('zoom_selection').addEventListener('click', function (e) {
+      console.log('zooming' + selectedImages.length + ' selected images.');
+      zoomSelectedImages(selectedImages);
     })
 
     // TODO
@@ -136,6 +154,19 @@
       document.body.style.opacity = 1.0
       return false
     }, false)
+  }
+
+  function zoomSelectedImages() {
+    var image_objects = [];
+    for (i = 0; i < selectedImages.length; i++) { 
+        image_objects[i] = { 'src' : selectedImages[i] };
+    }
+    console.log(image_objects);
+
+    $('.album-images').lightGallery({
+      dynamic: true,
+      dynamicEl: image_objects  
+    });
   }
 
   function readFiles (files) {
