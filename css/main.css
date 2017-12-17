@@ -9,6 +9,14 @@ header {
   max-width: 950px;
   margin: auto;
 }
+.public-albums {
+  padding: 2rem 15px;
+  max-width: 950px;
+  margin: auto;
+}
+.public-albums ul {
+  display: block;
+}
 
 .album {
   position: relative;
