@@ -1,13 +1,15 @@
 <!doctype html>
 <html>
   <head>
-    <title>Photo Sharing - Album Generator</title>
+    <title>Photo Book @ ccshaw</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/base.css"/>
     <link rel="stylesheet" href="css/header.css"/>
     <link rel="stylesheet" href="css/buttons.css"/>
     <link rel="stylesheet" href="css/prompt.css"/>
+    <script type="text/javascript" src="dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/js/mustache.min.js"></script>
+    <script type="text/javascript" src="dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/js/jquery-3.2.1.min.js"></script>
   </head>
 
   <body>
@@ -17,32 +19,49 @@
     <!-- TODO put ellipsis in :after -->
 
     <header>
-      <button class="create-album btn primary">Create Private album +</button>
-      <button id="create_album_public" class="create-album_public btn primary owner-only">Create Public album +</button>
-    </header>
-
-    <section>
-      <h1>Photo Sharing - Album Generator</h1>
+      <h6 class="nomar upcase"><a href="javascript:void(0)">ccshaw's</a></h6>
+      <h1 class="nomar-top">Photo Book</h1>
       <p>This peer to peer website can be used in 3 three ways.</p>
-      <ol>
-        <li>You can fork this site, to create your own album generator and photo sharing page.</li>
-        <li>You can use this site to create a private photo album, which will be a new Dat site hosted on your local machine.</li>
-        <li>You can view the public photo albums on this site.</li>
-      </ol>
-    </section>
-    <h2>Your Private Albums:</h2>
-    <div id="private_albums" class="albums-container"> 
-      <div class="create-album album" title="Create new album">
-        <div class="placeholder">+</div>
-        <div class="title">Create album</div>
-      </div>
-    </div>
-    <h2>This site's Public Albums:</h2>
-    <div id="public_albums" class="public-albums albums-container">
       <ul>
-        <!-- <li><a href="dat://7392ce72a9e04e8803e5fb046c27d412c56869ee77f7eac9725a8a368f85f2cd/">Misc</a></li> -->
+        <li>
+          <h5 class="nomar">Album Generator:</h5>
+          <p>You can use this site to create a private photo album, which will be a new Dat site hosted on your local machine.</p>
+          <button class="create-album btn primary centered">Create Private album +</button>
+        </li>
+        <li class="owner-hide">
+          <h5 class="nomar">Get your own Photo Book</h5>
+          <p>You can fork this site, to create your own album generator and photo sharing page. Go to the utility menu in Beaker Browser, and click Fork this site. You'll need to fill in your own details for now.</p>
+        </li>        
+        <li>
+          <h5 class="nomar">Browse ccshaw's photos</h5>
+          <p>You can view the public photo albums on this site.</p>
+          <a href="#public_albums" class="btn centered">Public Albums &darr;</a>
+        </li>
+        <li class="owner-only">
+          <h5 class="nomar">Create a new public Album</h5>
+          <p>You're the owner of this Photo Book. You can create public albums.</p>
+          <button id="create_album_public" class="create-album_public btn primary owner-only centered">Create Public album +</button>
+        </li>
       </ul>
-    </div>
+    </header>
+    <section>
+      <h2>Your Private Albums:</h2>
+      <div id="private_albums" class="albums-container"> 
+        <div class="create-album album" title="Create new album">
+          <div class="placeholder">+</div>
+          <div class="title">Create album</div>
+        </div>
+      </div>  
+    </section>
+    <section>
+    <h2>This site's Public Albums:</h2>
+      <div id="public_albums" class="public-albums albums-container">
+        <ul>
+          <!-- <li><a href="dat://7392ce72a9e04e8803e5fb046c27d412c56869ee77f7eac9725a8a368f85f2cd/">Misc</a></li> -->
+        </ul>
+      </div>  
+    </section>
+    
     <script src="js/index.js"></script>
   </body>
 </html>

@@ -1,18 +1,21 @@
 header {
   justify-content: flex-end !important;
 }
-
-.albums-container {
-  display: flex;
-  flex-wrap: wrap;
+h5 {
+    font-size: 18px;
+}
+body > section {
   padding: 2rem 15px;
   max-width: 950px;
   margin: auto;
 }
-.public-albums {
-  padding: 2rem 15px;
-  max-width: 950px;
+.albums-container {
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
+}
+.public-albums {
+
 }
 .public-albums ul {
   display: block;
@@ -145,3 +148,4 @@ header {
 .owner-only, .owner-only.btn {
   display: none;
 }
+.owner-hide {}

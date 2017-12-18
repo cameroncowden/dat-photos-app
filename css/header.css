@@ -1,9 +1,18 @@
-header {
+header ul {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 60px;
-  padding: 0 20px;
+  align-items: stretch;
+  padding: 0;
+}
+header ul li {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #333;
 }
 
 header > div {
@@ -17,4 +26,7 @@ header a {
 
 header a:hover {
   text-decoration: underline;
+}
+header ul li:not(:first-of-type) {
+    border-left-color: white; /*border fix, will not work if > 3 items */
 }

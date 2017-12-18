@@ -23,6 +23,8 @@
 
     if (archiveInfo.isOwner) {
       document.getElementById('create_album_public').style.display = 'block';
+      $('.owner-hide').hide();
+      $('.owner-only').css('display', 'inherit');
     }
 
   } catch (err) {
