@@ -115,9 +115,12 @@
     updatePrompt('')
     renderAlbum()
 
-    document.getElementById('more-btn').addEventListener('click', function (e) {
-      document.querySelector('.more-dropdown').classList.toggle('visible')
-    })
+    if (document.getElementById('more-btn') !== null) {
+      document.getElementById('more-btn').addEventListener('click', function (e) {
+        document.querySelector('.more-dropdown').classList.toggle('visible')
+      })
+    }
+    
 
     document.getElementById('zoom_selection').addEventListener('click', function (e) {
       console.log('zooming' + selectedImages.length + ' selected images.');
@@ -126,7 +129,10 @@
 
     // TODO
     // document.getElementById('edit-info').addEventListener('click', onEditInfo)
-    document.getElementById('delete-selected').addEventListener('click', onDeleteSelected)
+
+    if (document.getElementById('delete-selected') !== null) {
+      document.getElementById('delete-selected').addEventListener('click', onDeleteSelected)
+    }
 
     document.querySelector('input[type="file"]').addEventListener('change', function (e) {
       if (e.target.files) {
