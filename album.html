@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="{{DAT_ARCHIVE_URL}}/css/buttons.css"/>
     <link rel="stylesheet" href="{{DAT_ARCHIVE_URL}}/css/album.css"/>
     <link rel="stylesheet" href="{{DAT_ARCHIVE_URL}}/css/prompt.css"/>
+    <link rel="stylesheet" href="dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/css/lightgallery.min.css"/>
+    <script type="text/javascript" src="dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/js/lightgallery.min.js"></script>
+    <style type="text/css">
+      @font-face {
+        font-family: 'lg';
+        src: url("dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/fonts/lg.ttf") format("truetype");
+        src: url("dat://d35579620ba9e3725c22f530450b4d9e0811ad5db58cb5817170d6d8ae8e8318/fonts/lg.woff") format("woff");
+      }
+    </style>
   </head>
 
   <body>
@@ -45,6 +55,9 @@
       </div>
 
       <div class="album-images"></div>
+      <div class="actions">
+        <button id="zoom_selection" class="btn">View</button>
+      </div>
     </div>
     <textarea id="url"></textarea>
     <script src="{{DAT_ARCHIVE_URL}}/js/album.js"></script>

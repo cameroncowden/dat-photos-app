@@ -15,6 +15,9 @@
   cursor: pointer;
   transition: .15s background ease;
 }
+.btn.centered {
+  margin: 0 auto;
+}
 
 a.btn {
   display: inline-block;

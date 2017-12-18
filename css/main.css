@@ -1,13 +1,24 @@
 header {
   justify-content: flex-end !important;
 }
-
-.albums-container {
-  display: flex;
-  flex-wrap: wrap;
+h5 {
+    font-size: 18px;
+}
+body > section {
   padding: 2rem 15px;
   max-width: 950px;
   margin: auto;
+}
+.albums-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+}
+.public-albums {
+
+}
+.public-albums ul {
+  display: block;
 }
 
 .album {
@@ -134,3 +145,7 @@ header {
 #prompt:empty {
   display: none;
 }
+.owner-only, .owner-only.btn {
+  display: none;
+}
+.owner-hide {}
