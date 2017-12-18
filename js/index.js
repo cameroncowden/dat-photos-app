@@ -137,6 +137,99 @@
     window.localStorage.setItem('albums', JSON.stringify(albums))
   }
 
+  async function onCreatePhotobook(e) {
+
+    
+    //get the username & rotonde url from the user
+
+    var new_username = prompt("What is your name / rotonde username? (title for new photobook)");
+    if (new_username != "") {
+      var rotonde_url = prompt("If you have a rotonde profile, enter the dat url here: ");
+      var have_username = true;      
+    }
+
+    if(have_username) {
+
+    } else { alert("Please provide a name for the new archive!"); return 1; }
+    //replace the username and rotonde url in index html, and write it to new archive,
+    // replace your sharing link: with new dat url (show owner only)
+    //write album html, replace back info with new dat url, replace urls with relative dat references
+
+    // create the photobook archive    
+    const photobook = await DatArchive.create()
+
+    //duplicate css & js folders & files
+    await photobook.mkdir('/css');
+    await photobook.writeFile('/css/album.css', (await archive.readFile('/css/album.css')).toString());
+    await photobook.writeFile('/css/base.css', (await archive.readFile('/css/base.css')).toString());
+    await photobook.writeFile('/css/buttons.css', (await archive.readFile('/css/buttons.css')).toString());
+    await photobook.writeFile('/css/header.css', (await archive.readFile('/css/header.css')).toString());
+    await photobook.writeFile('/css/main.css', (await archive.readFile('/css/main.css')).toString());
+    await photobook.writeFile('/css/prompt.css', (await archive.readFile('/css/prompt.css')).toString());
+    await photobook.mkdir('/js');
+    await photobook.writeFile('/js/index.js', (await archive.readFile('/js/index.js')).toString());
+    await photobook.writeFile('/js/album.js', (await archive.readFile('/js/album.js')).toString());
+
+    //  span\s(?:class="username")>(.*)<\/span\>
+
+    //get the index file, and replace with new info
+    var index_html = await archive.readFile('index.html');
+    index_html = index_html.replace(/<span\s(?:class="username")>(.*)<\/span\>/, new_username);
+    await photobook.writeFile('index.html', index_html);
+
+
+
+    // write the album's URL to localStorage
+    // albums.push(album.url)
+    // window.localStorage.setItem('albums', JSON.stringify(albums))
+
+    // write the album's assets
+    // const html = await archive.readFile('album.html')
+    // html2 = html.replace(/{{DAT_ARCHIVE_URL}}/g, archive.url)
+    // await album.writeFile('index.html', html2)
+    await photobook.commit()
+
+    //but before we go
+
+    // var found_public_albums = false;
+    // try {
+    //   var public_albums = await archive.stat('/public_albums.json');
+    //   console.log(public_albums);
+    //   //file exists, should append new album
+    //   found_public_albums = true;
+    // } catch(e) {
+    //   //file doesn't exist (no public albums), should create !
+    //   console.log(e)
+    // }
+
+    // if (found_public_albums) {
+    //   //console.log('found public albums, appending new dat url')
+    //   var public_albums = await archive.readFile('/public_albums.json');
+    //   public_albums += ',';
+    //   public_albums += album.url;
+    //   await archive.writeFile('/public_albums.json', public_albums);
+    //   await archive.commit();
+      
+    // } else {
+    //   //console.log('creating public_albums.json and seeding with new dat url')
+    //   var public_albums = album.url;
+    //   await archive.writeFile('/public_albums.json', public_albums);
+    //   await archive.commit();
+    // }
+    
+
+    //add the new album url to this dat's public_albums.json
+
+    //ask if they want to go to the new archive
+    if (confirm('Go to your new photobook?')) {
+        //go
+        window.location = photobook.url
+    } else {
+        // stay, but re-render to list the public album
+        window.location.reload()
+    }
+  }
+
   // renderers
 
   function setTitle (title) {
@@ -150,6 +243,8 @@
     document.querySelectorAll('.create-album').forEach(el => el.addEventListener('click', onCreateAlbum))
 
     document.getElementById('create_album_public').addEventListener('click', onCreatePublicAlbum)
+
+    document.getElementById('create_photobook').addEventListener('click', onCreatePhotobook)
 
     renderAlbums()
   }

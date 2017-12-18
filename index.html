@@ -19,7 +19,7 @@
     <!-- TODO put ellipsis in :after -->
 
     <header>
-      <h6 class="nomar upcase"><a href="dat://04d401a123d274250425e5ca536a6feeba9c85d524ddbbb9cec55944009085d5/">ccshaw's</a></h6>
+      <h6 class="nomar upcase"><a class="userrotonde" href="dat://04d401a123d274250425e5ca536a6feeba9c85d524ddbbb9cec55944009085d5/"><span class="username">ccshaw's</span></a></h6>
       <h1 class="nomar-top">Photo Book</h1>
       <p>This peer to peer website can be used in 3 three ways.</p>
       <ul>
@@ -28,9 +28,10 @@
           <p>You can use this site to create a private photo album, which will be a new Dat site hosted on your local machine.</p>
           <button class="create-album btn primary centered">Create Private album +</button>
         </li>
-        <li class="owner-hide">
+        <li>
           <h5 class="nomar">Get your own Photo Book</h5>
-          <p>You can fork this site, to create your own album generator and photo sharing page. Go to the utility menu in Beaker Browser, and click Fork this site. You'll need to fill in your own details for now.</p>
+          <p class="owner-hide">You can fork this site, to create your own album generator and photo sharing page. Go to the utility menu in Beaker Browser, and click Fork this site. You'll need to fill in your own details for now.</p>
+          <button id="create_photobook" class="btn primary centered">RYO Photobook</button>
         </li>        
         <li>
           <h5 class="nomar">Browse ccshaw's photos</h5>
@@ -55,10 +56,7 @@
     </section>
     <section>
     <h2>This site's Public Albums:</h2>
-      <div id="public_albums" class="public-albums albums-container">
-        <ul>
-          <!-- <li><a href="dat://7392ce72a9e04e8803e5fb046c27d412c56869ee77f7eac9725a8a368f85f2cd/">Misc</a></li> -->
-        </ul>
+      <div id="public_albums" class="public-albums albums-container">        
       </div>  
     </section>
     
